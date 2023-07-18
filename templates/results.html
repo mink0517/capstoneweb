@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <!-- Create divs where the graphs will take place -->
+    <div id="actionDiv"></div>
+    <div id="stateDiv"></div>
+    <script>
+        var dataString = '{{ data|safe }}';
+        var data = JSON.parse(dataString);
+
+        var actionTrace = {
+            x: data.map((item, index) => index),
+            y: data.map(item => item.action),
+            mode: 'lines',
+            name: 'Action'
+        };
+
+        var stateTrace = {
+            x: data.map((item, index) => index),
+            y: data.map(item => item.state),
+            mode: 'lines',
+            name: 'State'
+        };
+
+        var layout1 = {
+            title: 'Action Graph',
+            xaxis: {title: 'Time'},
+            yaxis: {title: 'Value'}
+        };
+        var layout2 = {
+            title: 'State Graph',
+            xaxis: {title: 'Time'},
+            yaxis: {title: 'Value'}
+        };
+
+        Plotly.newPlot('actionDiv', [actionTrace], layout1);
+        Plotly.newPlot('stateDiv', [stateTrace], layout2);
+    </script>
+</body>
+</html>

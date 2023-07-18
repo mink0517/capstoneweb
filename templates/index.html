@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fridge Simulator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("form").on("submit", function(event){
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '/save_input',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response){
+                        alert(response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <form>
+      <label for="inputFridgeSize">냉장고 표면적:</label><br>
+      <input type="text" id="inputFridgeSize" name="inputFridgeSize"><br>
+      <label for="inputFridgeContent">냉장고 내용물 질량(kg):</label><br>
+      <input type="text" id="inputFridgeContent" name="inputFridgeContent"><br>
+      <label for="inputTime">시간대:</label><br>
+      <input type="text" id="inputTime" name="inputTime"><br>
+      <label for="inputSeason">계절:</label><br>
+      <input type="text" id="inputSeason" name="inputSeason"><br>
+      <label for="inputFridgeSetTemp">냉장고 설정 온도:</label><br>
+      <input type="text" id="inputFridgeSetTemp" name="inputFridgeSetTemp"><br>
+      <label for="inputFridgeCurrentTemp">냉장고 현재 내부온도:</label><br>
+      <input type="text" id="inputFridgeCurrentTemp" name="inputFridgeCurrentTemp"><br>
+      <label for="inputFridgeExtTemp">냉장고 외부온도:</label><br>
+      <input type="text" id="inputFridgeExtTemp" name="inputFridgeExtTemp"><br>
+      <!-- Add additional input fields as needed -->
+      <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
